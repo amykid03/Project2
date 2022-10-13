@@ -71,6 +71,24 @@ void computer(int com) {
 	else if (com == 2) rolling_dice2();
 	else if (com == 3) rolling_dice3();
 
+	if (c_x + two < 9) {
+		c_x += two;
+	}
+	else if (c_x + two >= 9) {
+		if (c_y + two < 9) {
+			c_y += (c_x + two - 9);
+			c_x = 9;
+		}
+		else if (c_y + two >= 9) {
+			if (c_x = (c_y + two - 9) > 0) {
+				c_x -= (c_y + two - 9);
+				c_y = 9;
+			}
+			else if (c_x = (c_y + two - 9) <= 0) {
+				c_y -= (two - c_x);
+			}
+		}
+	}
 }
 
 //ÁÖ»çÀ§¸¦ 1ÀÇ ÈûÀ¸·Î ±¼·ÈÀ» ¶§
