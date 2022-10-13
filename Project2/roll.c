@@ -28,20 +28,37 @@ void print_status(int p_y, int p_x, int p_e, int c_x, int c_y, int c_e) {
 }
 
 //사람이 주사위를 굴림
-int roll_dice(int player) {
+int roll_dice(int player, int a) {
 	scanf("%d", &player);
 	printf("Rolling the dice in strength %d.\n", player);
 	if (player == 1) rolling_dice1();
 	else if (player == 2) rolling_dice2();
 	else if (player == 3) rolling_dice3();
 
-	if (p_x + two < 9){
-		p_x += two;
-	}
-	else if (p_x + two >= 9) {
-		p_y += (p_x + two - 9);
-	}
+	a = 0;
 
+	if (a <= 35) {
+		if (a <= 9) {
+			p_y = 0;
+			p_x = a;
+		}
+		else if (a <= 18) {
+			p_x = 9;
+			p_y = a - 9;
+		}
+		else if (a <= 27) {
+			p_y = 9;
+			p_x = a - 18;
+		}
+		else if (a <= 35) {
+			p_x = 0;
+			p_y = a - 27;
+		}
+	}
+	else if (a > 35) {
+		p_y = 0;
+		p_x = a - 35;
+	}
 }
 
 
@@ -52,6 +69,7 @@ void computer(int com) {
 	if (com == 1) rolling_dice1();
 	else if (com == 2) rolling_dice2();
 	else if (com == 3) rolling_dice3();
+
 }
 
 //주사위를 1의 힘으로 굴렸을 때
@@ -74,6 +92,6 @@ int rolling_dice3() {
 	dice = rand() % 6 + 1;
 	dice1 = rand() % 6 + 1;
 	dice2 = rand() % 6 + 1;
-	two = (dice + dice1 + dice2) / 2;
+	two = (dice + dice1 + dice2) / 3;
 	printf("Moving %d spaces.\n", two);
 }

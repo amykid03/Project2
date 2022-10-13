@@ -27,12 +27,11 @@ extern int c_y;
 extern int c_e;
 
 void print_status(int, int, int, int, int, int);
-int roll_dice(int);
+int roll_dice(int,int);
 void computer(int);
 int rolling_dice1();
 int rolling_dice2();
 int rolling_dice3();
-void x_move();
-void y_move();
+void move();
 
 #endif

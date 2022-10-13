@@ -12,7 +12,7 @@ int main() {
 	while (1) {
 		print_status(p_y, p_x, p_e, c_x, c_y, c_e);
 
-		roll_dice(player);
+		roll_dice(player, a);
 		printf("Computer's turn.\n");
 		computer(com);
 
