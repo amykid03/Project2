@@ -36,6 +36,7 @@ int roll_dice(int player, int a) {
 	else if (player == 3) rolling_dice3();
 
 	a = 0;
+	a += two;
 
 	if (a <= 35) {
 		if (a <= 9) {
