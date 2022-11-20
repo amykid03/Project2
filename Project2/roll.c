@@ -5,8 +5,9 @@ int player = 0;
 int dice = 0;
 int dice1 = 0;
 int dice2 = 0;
-int two = 0;
+int* a_ptr;
 int a = 0;
+a_ptr = &a;
 
 int p_y = 0;
 int p_x = 0;
@@ -28,17 +29,21 @@ void print_status(int p_y, int p_x, int p_e, int c_x, int c_y, int c_e) {
 }
 
 //사람이 주사위를 굴림
-int roll_dice(int player, int a) {
+int roll_dice(int player, int* a) {
 	scanf("%d", &player);
 	printf("Rolling the dice in strength %d.\n", player);
-	if (player == 1) rolling_dice1();
-	else if (player == 2) rolling_dice2();
-	else if (player == 3) rolling_dice3();
-
-	a = 0;
-	a += two;
+	if (player == 1) {
+		*a_ptr += rolling_dice1();
+	}
+	else if (player == 2) {
+		*a_ptr += rolling_dice2();
+	}
+	else if (player == 3) {
+		*a_ptr += rolling_dice3();
+	}
 
 	if (a <= 35) {
+
 		if (a <= 9) {
 			p_y = 0;
 			p_x = a;
@@ -67,27 +72,38 @@ int roll_dice(int player, int a) {
 void computer(int com) {
 	com = rand() % 3 + 1;
 	printf ("Rolling the dice in strength %d.\n", com);
-	if (com == 1) rolling_dice1();
-	else if (com == 2) rolling_dice2();
-	else if (com == 3) rolling_dice3();
-
-	if (c_x + two < 9) {
-		c_x += two;
+	if (com == 1) {
+		*a_ptr += rolling_dice1();
 	}
-	else if (c_x + two >= 9) {
-		if (c_y + two < 9) {
-			c_y += (c_x + two - 9);
-			c_x = 9;
+	else if (com == 2) {
+		*a_ptr += rolling_dice2();
+	}
+	else if (com == 3) {
+		*a_ptr += rolling_dice3();
+	}
+
+	if (a <= 35) {
+
+		if (a <= 9) {
+			p_y = 0;
+			p_x = a;
 		}
-		else if (c_y + two >= 9) {
-			if (c_x = (c_y + two - 9) > 0) {
-				c_x -= (c_y + two - 9);
-				c_y = 9;
-			}
-			else if (c_x = (c_y + two - 9) <= 0) {
-				c_y -= (two - c_x);
-			}
+		else if (a <= 18) {
+			p_x = 9;
+			p_y = a - 9;
 		}
+		else if (a <= 27) {
+			p_y = 9;
+			p_x = a - 18;
+		}
+		else if (a <= 35) {
+			p_x = 0;
+			p_y = a - 27;
+		}
+	}
+	else if (a > 35) {
+		p_y = 0;
+		p_x = a - 35;
 	}
 }
 
@@ -113,4 +129,19 @@ int rolling_dice3() {
 	dice2 = rand() % 6 + 1;
 	two = (dice + dice1 + dice2) / 3;
 	printf("Moving %d spaces.\n", two);
+}
+
+
+void map() {
+	printf("BlueMarble MAP\n");
+	printf("l  ll  ll  ll  ll  ll  ll  ll  ll  ll  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  l                                l  l\n");
+	printf("l  ll  ll  ll  ll  ll  ll  ll  ll  ll  l\n");
 }
